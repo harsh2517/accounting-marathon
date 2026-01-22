@@ -61,8 +61,8 @@ def clean_email(email: str) -> str:
 
 def normalize_password(pwd: str) -> str:
     """
-    Pre-hash password to fixed length so bcrypt never sees >72 bytes
-
+    Pre-hash password to hex string so bcrypt never sees >72 bytes
+    and handles it as a standard string.
     """
     return hashlib.sha256(pwd.encode("utf-8")).hexdigest()
 
