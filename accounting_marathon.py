@@ -61,8 +61,8 @@ def clean_email(email: str) -> str:
 
 def normalize_password(pwd: str) -> str:
     """
-    Password ko SHA-256 hex string mein convert karein.
-    Isse length hamesha 64 characters rahegi (Jo 72 se kam hai).
+    Pre-hash password to fixed length so bcrypt never sees >72 bytes
+
     """
     return hashlib.sha256(pwd.encode("utf-8")).hexdigest()
 
