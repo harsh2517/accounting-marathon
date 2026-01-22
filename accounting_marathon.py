@@ -59,11 +59,12 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def clean_email(email: str) -> str:
     return email.strip().lower()
 
-def normalize_password(pwd: str) -> bytes:
+def normalize_password(pwd: str) -> str:
     """
-    Pre-hash password to fixed length so bcrypt never sees >72 bytes
+    Password ko SHA-256 hex string mein convert karein.
+    Isse length hamesha 64 characters rahegi (Jo 72 se kam hai).
     """
-    return hashlib.sha256(pwd.encode("utf-8")).digest()
+    return hashlib.sha256(pwd.encode("utf-8")).hexdigest()
 
 def hash_password(pwd: str) -> str:
     return pwd_context.hash(normalize_password(pwd))
